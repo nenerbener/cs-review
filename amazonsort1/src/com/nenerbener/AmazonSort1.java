@@ -7,22 +7,28 @@ public class AmazonSort1 {
 
 	public static void main (String[] args) {
 		
-		short[] slots;
-		
 		// read in # coins
 		Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter number of slots: ");
+		String numSlotsString = scanner.nextLine();
+		System.out.println("numSlotsString: " + numSlotsString);
+		
+		int numSlots = Integer.parseInt(numSlotsString);
+		System.out.println("numSlots: " + numSlots);
+		System.out.println("---");
+		
 		System.out.print("Enter number of coins: ");
-		String numCoinString = scanner.nextLine();
-		System.out.println("numCoinString: " + numCoinString);
+		String numCoinsString = scanner.nextLine();
+		System.out.println("numCoinsString: " + numCoinsString);
 		scanner.close();
 		
-		int numCoins = Integer.parseInt(numCoinString);
+		int numCoins = Integer.parseInt(numCoinsString);
 		System.out.println("numCoins: " + numCoins);
 		System.out.println("---");
 		
 		//generate random # of coins in slots
-		int[] coinArray = new int[numCoins];
-		for (int i = 0; i<coinArray.length;i++) {
+		int[] coinArray = new int[numSlots];
+		for (int i = 0; i<numCoins;i++) {
 			int ranInt = (int) (Math.random() * 10);
 //			System.out.println("i ranInt: " + i + "/" + ranInt);
 			coinArray[ranInt]++;
@@ -56,6 +62,7 @@ public class AmazonSort1 {
 		
 		printCoinArray(coinArray); //print inital coinArray
 
+		// now do the same algorithm in reverse
 		for (int i=coinArray.length-1; i>0;i--) {
 			outerloop: {
 				int s0=coinArray[i];
