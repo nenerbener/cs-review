@@ -1,39 +1,65 @@
 package com.nenerbener;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 public class GroupOrders {
 
 	// driver
 	public static void main (String[] args) {
 
+		// create item list
 		Item itemA = new Item("A");
 		Item itemB = new Item("B");
 		Item itemC = new Item("C");
 		Item itemD = new Item("D");
 		Item itemE = new Item("E");
+		Item itemF = new Item("F");
+		Item itemG = new Item("G");
+		Item itemH = new Item("H");
+		List<Item> itemList = new ArrayList<>();
+
+		itemList.add(itemA);
+		itemList.add(itemB);
+		itemList.add(itemC);
+		itemList.add(itemD);
+		itemList.add(itemE);
+		itemList.add(itemF);
+		itemList.add(itemG);
+		itemList.add(itemH);
 		
+		// create orders
 		Order  order1 = new Order("O1");
 		Order  order2 = new Order("O2");
 		Order  order3 = new Order("O3");
 		Order  order4 = new Order("O4");
 		
+		// associate items to orders
 		order1.assocItemToOrder(itemA);
 		order1.assocItemToOrder(itemB);
-		
-		order2.assocItemToOrder(itemB);
 		order2.assocItemToOrder(itemC);
+		order2.assocItemToOrder(itemD);
+		order3.assocItemToOrder(itemE);
+		order3.assocItemToOrder(itemF);
+		order4.assocItemToOrder(itemG);
+		order4.assocItemToOrder(itemH);
+		order4.assocItemToOrder(itemA);
 
-		order3.assocItemToOrder(itemD);
-		order3.assocItemToOrder(itemD);
-
-		order4.assocItemToOrder(itemD);
-		order4.assocItemToOrder(itemE);
-
-		Item it = itemB;
-		
+		// iterate through items and build connected items
 		OrderGrp ordGrp = new OrderGrp();
-		ordGrp.traverseToOrders(it,null);
+		for (Item it:itemList) {
+			ordGrp.traverseToOrders(it,null);
+			List<Order> orders = ordGrp.getOrders();
+			List<Item> items = ordGrp.getItems();
+			Set<Order> orderSet = new HashSet<Order>(orders);
+			for(Order or:orderSet) {
+				System.out.print(or.orderName + " ");
+			}
+			System.out.println();
+			orders.clear();
+			items.clear();
+		}
 	}
 }
 
@@ -48,8 +74,12 @@ class OrderGrp {
 	}
 	
 	void traverseToOrders(Item it, Order currentOrder) {
-		System.out.println("it: " + it.itemName);
-//		System.out.println("traverseToOrder size: " + it.orders.size());
+
+//		if(currentOrder==null) System.out.println("it: " + it.itemName);
+//		else System.out.println("currentOrder it: " + currentOrder.orderName + " " + it.itemName);
+//		if (currentOrder != null) orders.add(currentOrder);
+		items.add(it);
+
 		for(Order or:it.orders) {
 			Item currentItem = it;
 			if (or.equals(currentOrder)) continue;
@@ -58,12 +88,20 @@ class OrderGrp {
 	}
 
 	void traverseToItems(Order or, Item currentItem) {
-//		System.out.println("traverseToItems size: " + or.items.size());
+		orders.add(or);
 		for(Item it:or.items) {
 			Order currentOrder = or;
 			if (it.equals(currentItem)) continue;
 			traverseToOrders(it,currentOrder);
 		}
+	}
+	
+	List<Order> getOrders() {
+		return orders;
+	}
+	
+	List<Item> getItems() {
+		return items;
 	}
 }
 
