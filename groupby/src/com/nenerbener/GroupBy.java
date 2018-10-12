@@ -67,9 +67,16 @@ public class GroupBy {
     		personsByPlace.get(p.getCity()).add(p);
     	}
     	System.out.println("Persons by location: " + personsByPlace);
-    }
 
+		// convert hashmap back to arraylist
+		List<Person> listOfPersons = new ArrayList<Person>();
+		for (List<Person> lp: personsByPlace.values()) {
+			listOfPersons.addAll(lp);
+			System.out.println("In " + lp.get(0).getCity() + ": " + lp);
+		}
+		System.out.println("List of persons: " + listOfPersons);
 
+	}
 }
 
 class Person{
