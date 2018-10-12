@@ -34,31 +34,52 @@ public class GroupOrders {
 		Order  order2 = new Order("O2");
 		Order  order3 = new Order("O3");
 		Order  order4 = new Order("O4");
+		List<Order> orderList = new ArrayList<>();
+		orderList.add(order1);
+		orderList.add(order2);
+		orderList.add(order3);
+		orderList.add(order4);
 		
 		// associate items to orders
 		order1.assocItemToOrder(itemA);
 		order1.assocItemToOrder(itemB);
+
 		order2.assocItemToOrder(itemC);
 		order2.assocItemToOrder(itemD);
-		order3.assocItemToOrder(itemE);
+		order2.assocItemToOrder(itemE);
+
 		order3.assocItemToOrder(itemF);
-		order4.assocItemToOrder(itemG);
+		order3.assocItemToOrder(itemG);
+
 		order4.assocItemToOrder(itemH);
 		order4.assocItemToOrder(itemA);
 
 		// iterate through items and build connected items
 		OrderGrp ordGrp = new OrderGrp();
-		for (Item it:itemList) {
-			ordGrp.traverseToOrders(it,null);
+		List<Set<Order>> orderSets = new ArrayList<>();
+//		for (Item it:itemList) {
+//			ordGrp.traverseToOrders(it,null);
+//			List<Order> orders = ordGrp.getOrders();
+//			Set<Order> orderSet = new HashSet<Order>(orders);
+//			orderSets.add(orderSet);
+//			for(Order or:orderSet) {
+//				System.out.print(or.orderName + " ");
+//			}
+//			System.out.println();
+//			orders.clear();
+//			ordGrp.getOrders().clear();
+		for (Order or:orderList) {
+			ordGrp.traverseToItems(or,null);
 			List<Order> orders = ordGrp.getOrders();
-			List<Item> items = ordGrp.getItems();
-			Set<Order> orderSet = new HashSet<Order>(orders);
-			for(Order or:orderSet) {
-				System.out.print(or.orderName + " ");
-			}
-			System.out.println();
+			System.out.println(ordGrp);
+//			Set<Order> orderSet = new HashSet<Order>(orders);
+//			orderSets.add(orderSet);
+//			for(Order or1:orderSet) {
+//				System.out.print(or.orderName + " ");
+//			}
+//			System.out.println();
 			orders.clear();
-			items.clear();
+			ordGrp.getOrders().clear();
 		}
 	}
 }
@@ -79,7 +100,6 @@ class OrderGrp {
 //		else System.out.println("currentOrder it: " + currentOrder.orderName + " " + it.itemName);
 //		if (currentOrder != null) orders.add(currentOrder);
 		items.add(it);
-
 		for(Order or:it.orders) {
 			Item currentItem = it;
 			if (or.equals(currentOrder)) continue;
@@ -102,6 +122,19 @@ class OrderGrp {
 	
 	List<Item> getItems() {
 		return items;
+	}
+	
+	public String toString() {
+		StringBuilder strbld = new StringBuilder("group[ ");
+	
+		for (Order grpOrder:orders) {
+			strbld.append(grpOrder.orderName).append(": ");
+			for (Item it:grpOrder.items) {
+					strbld.append(it.itemName).append(" ");
+			}
+		}
+		strbld.append("]");
+		return strbld.toString();
 	}
 }
 
