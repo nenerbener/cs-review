@@ -56,29 +56,14 @@ public class GroupOrders {
 
 		// iterate through items and build connected items
 		OrderGrp ordGrp = new OrderGrp();
-		List<Set<Order>> orderSets = new ArrayList<>();
-//		for (Item it:itemList) {
-//			ordGrp.traverseToOrders(it,null);
-//			List<Order> orders = ordGrp.getOrders();
-//			Set<Order> orderSet = new HashSet<Order>(orders);
-//			orderSets.add(orderSet);
-//			for(Order or:orderSet) {
-//				System.out.print(or.orderName + " ");
-//			}
-//			System.out.println();
-//			orders.clear();
-//			ordGrp.getOrders().clear();
+		List<Order> traversedOrders = new ArrayList<>();
 		for (Order or:orderList) {
-			ordGrp.traverseToItems(or,null);
-			List<Order> orders = ordGrp.getOrders();
+			if (!traversedOrders.contains(or)) {
+				ordGrp.traverseToItems(or,null);
+			}
+			traversedOrders.addAll(ordGrp.getOrders());
 			System.out.println(ordGrp);
-//			Set<Order> orderSet = new HashSet<Order>(orders);
-//			orderSets.add(orderSet);
-//			for(Order or1:orderSet) {
-//				System.out.print(or.orderName + " ");
-//			}
-//			System.out.println();
-			orders.clear();
+			traversedOrders.clear();
 			ordGrp.getOrders().clear();
 		}
 	}
