@@ -114,12 +114,6 @@ public class BinTree {
     //test driver
     public static void main(String[] args) {
     	
-    	Integer i = 1;
-    	Integer j =new Integer(2);
-    	
-    	System.out.println(i.toString());
-    	System.out.println(j.toString());
-    	
     	List<AnyClass> listOfNames = new ArrayList<>();
     	listOfNames.add(new AnyClass("b"));
     	listOfNames.add(new AnyClass("c"));
