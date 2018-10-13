@@ -17,9 +17,9 @@ public class NotificationSystem {
 		Thread nt = new Thread(nr);
 		nt.setDaemon(true);
 		nt.start();
-		Thread.sleep(3000);
+		Thread.sleep(3000); //this requires catching or throwing InterruptedException
+	
 	}
-
 }
 
 // basic message
@@ -63,6 +63,10 @@ class NotificationThread implements Runnable {
 		}
 	}
 	
+	synchronized void addtMessageToQueue(Message msg)	 {
+			messageQueue.add(msg);
+		}
+
 	Message getMessageFromQueue()	 {
 		if ((messageQueue != null)&&(!messageQueue.isEmpty())) {
 			return messageQueue.remove();
