@@ -2,6 +2,7 @@ package com.nenerbener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 class BNode {
 
@@ -30,10 +31,15 @@ class AnyClass {
 	String show() {
 		return surname;
 	}
+
+	public String toString() {
+		return surname;
+	}
 }
 
 public class BinTree {
     BNode theBTRootNode;
+    static Stack<BNode> stack;
 
     public BinTree() // constructor
     {
@@ -72,9 +78,37 @@ public class BinTree {
         }
     }
 
+    // ------------------ Preorder traversal---------x----------
+    protected void preorder(BNode theRootNode) {
+        if (theRootNode != null) {
+            theRootNode.show();
+            inorder(theRootNode.leftBNode);
+            inorder(theRootNode.rightBNode);
+        }
+    }
+
+    // ------------------ Postorder traversal-------------------
+    protected void postorder(BNode theRootNode) {
+        if (theRootNode != null) {
+            inorder(theRootNode.leftBNode);
+            inorder(theRootNode.rightBNode);
+            theRootNode.show();
+        }
+    }
+
     //calls the method to do in order
     public void inorderBST() {
         inorder(theBTRootNode);
+    }
+
+    //calls the method to do pre order
+    public void preorderBST() {
+        preorder(theBTRootNode);
+    }
+
+    //calls the method to do post order
+    public void postorderBST() {
+        postorder(theBTRootNode);
     }
 
     // ----- Search for key name and  returns ref. 
@@ -84,6 +118,7 @@ public class BinTree {
         if (theRootNode == null) {
             return null;
         } else {
+        	stack.push(theRootNode);
             //checks if they are equal
             if (keyName.compareTo(theRootNode.anyClass.surname) == 0) {
                 return theRootNode;
@@ -95,6 +130,7 @@ public class BinTree {
                 // if bigger traverses to the left
                 return search(theRootNode.rightBNode, keyName);
             }
+
         }
     }
 
@@ -116,11 +152,11 @@ public class BinTree {
     	
     	List<AnyClass> listOfNames = new ArrayList<>();
     	listOfNames.add(new AnyClass("b"));
+    	listOfNames.add(new AnyClass("g"));
     	listOfNames.add(new AnyClass("c"));
     	listOfNames.add(new AnyClass("d"));
     	listOfNames.add(new AnyClass("e"));
     	listOfNames.add(new AnyClass("f"));
-    	listOfNames.add(new AnyClass("g"));
     	listOfNames.add(new AnyClass("h"));
     	listOfNames.add(new AnyClass("i"));
     	listOfNames.add(new AnyClass("j"));
@@ -131,5 +167,15 @@ public class BinTree {
     		bt.insertBST(ac);
     	}
     	bt.inorderBST();
+    	System.out.println();
+    	bt.preorderBST();
+    	System.out.println();
+    	bt.postorderBST();
+    	System.out.println();
+    	
+    	stack = new Stack<BNode>();
+    	System.out.println("search result: " + bt.searchBST("g"));
+    	System.out.println("distance: " + (stack.size()-1));
+    	while(!stack.empty()) System.out.println(stack.pop().anyClass.toString());
     }
 }
