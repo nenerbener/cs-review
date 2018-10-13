@@ -28,7 +28,7 @@ public class NotificationSystem {
 	}
 }
 
-// basic message
+// basic message with getters/setters/toString
 class Message {
 	String recipient;
 	String message;
@@ -56,6 +56,7 @@ class Message {
 	
 }
 
+//feeder thread
 class FeederThread implements Runnable {
 	BlockingQueue<Message> messageQueue;
 	Message messageToAdd;
@@ -67,6 +68,8 @@ class FeederThread implements Runnable {
 	public void run() {
 		while (true) {
 			queueMessages();
+			
+			//simulate feeder delay
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -78,7 +81,9 @@ class FeederThread implements Runnable {
 	// get message into blocking queue from source
 	void queueMessages() {
 		for (int irec=0; irec<5; irec++) {
-			messageToAdd = new Message(Integer.toString(irec),Integer.toString(r.nextInt()));
+			
+			//nextInt generates negative values, zero the largest bit to make positive number
+			messageToAdd = new Message(Integer.toString(irec),Integer.toString(r.nextInt()&Integer.MAX_VALUE));
 			try {
 				messageQueue.put(messageToAdd);
 				System.out.println("added: " + messageToAdd);
@@ -90,6 +95,7 @@ class FeederThread implements Runnable {
 	}
 }
 
+//messaging thread
 class NotifyThread implements Runnable {
 	BlockingQueue<Message> messageQueue;
 	NotifyThread(BlockingQueue<Message> messageQueue) {
@@ -98,7 +104,8 @@ class NotifyThread implements Runnable {
 	public void run() {
 		sendMessages();
 	}
-	
+
+	//send messages that are in messageQueue
 	void sendMessages()	 {
 		while (true) {
 			try {
