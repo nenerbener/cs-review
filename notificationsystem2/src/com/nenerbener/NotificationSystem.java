@@ -10,16 +10,21 @@ public class NotificationSystem {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		BlockingQueue<Message> messageQueue = new LinkedBlockingQueue<>();
-//		BlockingQueue<Message> messageQueue = new ArrayBlockingQueue<>(1024);
+		//BlockingQueue<Message> messageQueue = new LinkedBlockingQueue<>();
+		BlockingQueue<Message> messageQueue = new ArrayBlockingQueue<>(1024);
+		//when using put and take methods for BlockingQueue do not test for empty queue. The checking is done during the put and take method
 
+		//create feed and notify threads and start
 		Runnable feeder = new FeederThread(messageQueue);
 		Runnable notify = new NotifyThread(messageQueue);
 		Thread f = new Thread(feeder);
-		f.start();
-		Thread.sleep(1000); //this requires catching or throwing InterruptedExceptionmillis
 		Thread n = new Thread(notify);
+//		f.setDaemon(true); //setting daemon=true means don't wait for thread to finish
+//		n.setDaemon(true);
+		f.start();
 		n.start();
+//		f.join(); //calling join means for this thread to wait for the threa that called join to finish before proceeding
+//		n.join();
 	}
 }
 
