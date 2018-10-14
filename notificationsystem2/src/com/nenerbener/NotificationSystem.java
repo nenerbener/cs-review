@@ -7,15 +7,21 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.Random;
 
 public class NotificationSystem {
-
+	
 	public static void main(String[] args) throws InterruptedException {
+
+		String instanceName = null;
+		if(!(args == null)&&(args.length == 2)) {
+			instanceName = new String(args[1]);
+			System.out.println("instanceName: " + instanceName);
+		}
 
 		//BlockingQueue<Message> messageQueue = new LinkedBlockingQueue<>();
 		BlockingQueue<Message> messageQueue = new ArrayBlockingQueue<>(1024);
 		//when using put and take methods for BlockingQueue do not test for empty queue. The checking is done during the put and take method
 
 		//create feed and notify threads and start
-		Runnable feeder = new FeederThread(messageQueue);
+		Runnable feeder = new FeederThread(messageQueue,instanceName);
 		Runnable notify = new NotifyThread(messageQueue);
 		Thread f = new Thread(feeder);
 		Thread n = new Thread(notify);
@@ -26,10 +32,8 @@ public class NotificationSystem {
 //		f.join(); //calling join means for this thread to wait for the threa that called join to finish before proceeding
 //		n.join();
 	}
-}
-
 // basic message with getters/setters/toString
-class Message {
+private static class Message {
 	String recipient;
 	String message;
 	
@@ -57,13 +61,15 @@ class Message {
 }
 
 //feeder thread
-class FeederThread implements Runnable {
+private static class FeederThread implements Runnable {
 	BlockingQueue<Message> messageQueue;
 	Message messageToAdd;
 	Random r = new Random();
+	String instanceName;
 
-	FeederThread(BlockingQueue<Message> messageQueue) {
+	FeederThread(BlockingQueue<Message> messageQueue, String instanceName) {
 		this.messageQueue = messageQueue;
+		this.instanceName = instanceName;
 	}
 	public void run() {
 		while (true) {
@@ -86,7 +92,7 @@ class FeederThread implements Runnable {
 			messageToAdd = new Message(Integer.toString(irec),Integer.toString(r.nextInt()&Integer.MAX_VALUE));
 			try {
 				messageQueue.put(messageToAdd);
-				System.out.println("added: " + messageToAdd);
+				System.out.println("added: " + instanceName + ": " + messageToAdd);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -96,7 +102,7 @@ class FeederThread implements Runnable {
 }
 
 //messaging thread
-class NotifyThread implements Runnable {
+private static class NotifyThread implements Runnable {
 	BlockingQueue<Message> messageQueue;
 	NotifyThread(BlockingQueue<Message> messageQueue) {
 		this.messageQueue = messageQueue;
@@ -117,3 +123,5 @@ class NotifyThread implements Runnable {
 		}
 	}
 }
+}
+
