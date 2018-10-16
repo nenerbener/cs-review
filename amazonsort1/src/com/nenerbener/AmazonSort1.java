@@ -13,7 +13,7 @@ public class AmazonSort1 {
 		String numSlotsString = scanner.nextLine();
 		System.out.println("numSlotsString: " + numSlotsString);
 		
-		int numSlots = Integer.parseInt(numSlotsString);
+		int numSlots = Integer.decode(numSlotsString);
 		System.out.println("numSlots: " + numSlots);
 		System.out.println("---");
 		
@@ -29,7 +29,7 @@ public class AmazonSort1 {
 		//generate random # of coins in slots
 		int[] coinArray = new int[numSlots];
 		for (int i = 0; i<numCoins;i++) {
-			int ranInt = (int) (Math.random() * 10);
+			int ranInt = (int) (Math.random() * numSlots);
 //			System.out.println("i ranInt: " + i + "/" + ranInt);
 			coinArray[ranInt]++;
 		}
