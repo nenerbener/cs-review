@@ -25,7 +25,10 @@ class BNode {
 class AnyClass {
 	String surname;
 	AnyClass(String str) {
-		surname = str;
+		surname = str;//		Integer[] jArray = new Integer[10];
+//		for (Integer j:jArray) System.out.print(jArray[j]);
+//		System.out.println();
+
 	}
 
 	String show() {
@@ -55,7 +58,10 @@ public class BinTree {
         } else if (myNewNode.anyClass.surname.compareTo(
                           theRootNode.anyClass.surname) < 0) {
             theRootNode.leftBNode = insertAB(theRootNode.leftBNode,myNewNode);
-        } else {
+        } else {//		Integer[] jArray = new Integer[10];
+//    		for (Integer j:jArray) System.out.print(jArray[j]);
+//    		System.out.println();
+
             // else if bigger appends to the right
             theRootNode.rightBNode = 
                insertAB(theRootNode.rightBNode, myNewNode);
@@ -94,7 +100,15 @@ public class BinTree {
             inorder(theRootNode.rightBNode);
             theRootNode.show();
         }
-    }
+    }//    	listOfNames.add(new AnyClass("c"));
+//	listOfNames.add(new AnyClass("d"));
+//	listOfNames.add(new AnyClass("e"));
+//	listOfNames.add(new AnyClass("f"));
+//	listOfNames.add(new AnyClass("h"));
+//	listOfNames.add(new AnyClass("i"));
+//	listOfNames.add(new AnyClass("j"));
+//	listOfNames.add(new AnyClass("a"));
+
 
     //calls the method to do in order
     public void inorderBST() {
@@ -152,15 +166,23 @@ public class BinTree {
     	
     	List<AnyClass> listOfNames = new ArrayList<>();
     	listOfNames.add(new AnyClass("b"));
-    	listOfNames.add(new AnyClass("g"));
-    	listOfNames.add(new AnyClass("c"));
-    	listOfNames.add(new AnyClass("d"));
-    	listOfNames.add(new AnyClass("e"));
-    	listOfNames.add(new AnyClass("f"));
-    	listOfNames.add(new AnyClass("h"));
-    	listOfNames.add(new AnyClass("i"));
-    	listOfNames.add(new AnyClass("j"));
     	listOfNames.add(new AnyClass("a"));
+    	listOfNames.add(new AnyClass("c"));
+//    	listOfNames.add(new AnyClass("d"));//    	listOfNames.add(new AnyClass("c"));
+//    	listOfNames.add(new AnyClass("d"));
+//    	listOfNames.add(new AnyClass("e"));
+//    	listOfNames.add(new AnyClass("f"));
+//    	listOfNames.add(new AnyClass("h"));
+//    	listOfNames.add(new AnyClass("i"));
+//    	listOfNames.add(new AnyClass("j"));
+//    	listOfNames.add(new AnyClass("a"));
+
+//    	listOfNames.add(new AnyClass("e"));
+//    	listOfNames.add(new AnyClass("f"));
+//    	listOfNames.add(new AnyClass("h"));
+//    	listOfNames.add(new AnyClass("i"));
+//    	listOfNames.add(new AnyClass("j"));
+//    	listOfNames.add(new AnyClass("a"));
     	BinTree bt = new BinTree();
     	
     	for (AnyClass ac:listOfNames) {
@@ -174,7 +196,7 @@ public class BinTree {
     	System.out.println();
     	
     	stack = new Stack<BNode>();
-    	System.out.println("search result: " + bt.searchBST("g"));
+    	System.out.println("search result: " + bt.searchBST("c"));
     	System.out.println("distance: " + (stack.size()-1));
     	while(!stack.empty()) System.out.println(stack.pop().anyClass.toString());
     }

@@ -36,7 +36,7 @@ public class MergeStreams {
 
     private static int[] mergeStreams(int[][] is) {
         PriorityQueue<Integer> pq = new PriorityQueue<Integer>(100,
-        	new Comparator <Integer> () {
+        	new Comparator<Integer> () {
         		public int compare(Integer x, Integer y) {
 					if (x < y)
 					{

@@ -9,6 +9,18 @@ public class AmazonSort2 {
 
 	public static void main (String[] args) {
 		
+		
+		int[] iArray = new int[10];
+		for (int k = 0; k < iArray.length; k++) {
+			int i = iArray[k];
+			System.out.print(iArray);
+		}
+		for (int i:iArray) System.out.print(iArray[i]);
+		System.out.println();
+		Integer[] jArray = new Integer[10];
+		for (Integer j:jArray) System.out.print(jArray[j]);
+		System.out.println();
+		
 		// read in # coins
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Enter number of slots: ");
@@ -17,7 +29,10 @@ public class AmazonSort2 {
 		
 		System.out.print("Enter number of coins: ");
 		String numCoinsString = scanner.nextLine();
-		int numCoins = Integer.decode(numCoinsString);
+		int numCoins = Integer.decode(numCoinsString);//		Integer[] jArray = new Integer[10];
+//		for (Integer j:jArray) System.out.print(jArray[j]);
+//		System.out.println();
+
 //		int numCoins = Integer.parseInt(numCoinsString);
 		scanner.close();
 		
@@ -39,7 +54,10 @@ public class AmazonSort2 {
 		// 6. reverse array and repeat
 		
 		for (int i=0; i<coins.size()-1;i++) {
-			outerloop: {
+			outerloop: {//		Integer[] jArray = new Integer[10];
+//			for (Integer j:jArray) System.out.print(jArray[j]);
+//			System.out.println();
+
 				int s0=coins.get(i).intValue();
 				if (s0==0) { //find s0
 					int i2 = i + 1;
@@ -64,7 +82,7 @@ public class AmazonSort2 {
 			outerloop: {
 				int s0=coins.get(i).intValue();
 				if (s0==0) { //find s0
-					int i2 = i - 1;
+					int i2 = i - 1;//
 					for (int j=i2; j>=0;j--) {
 						if (coins.get(j).intValue()>=2) { //find s2
 							Integer coin = coins.get(i);
@@ -81,31 +99,62 @@ public class AmazonSort2 {
 		}
 		
 		System.out.println(coins.getAll());
-//
-//		// now do the same algorithm in reverse
-//		for (int i=coinArray.length-1; i>0;i--) {
-//			outerloop: {
-//				int s0=coinArray[i];
-//				if (s0==0) { //find s0
-//					int i2 = i - 1;
-//					for (int j=i2; j>=0;j--) {Integer
-//						if (coinArray[j]>=2) { //find s2
-//							coinArray[i]++;interface CoinArray<T> {
-//								void add(T coin);
-//								void remove(T coin);
-//								String getAll();
-//							}
-//							coinArray[j]--;
-//							break outerloop;
-//						}
-//					}
-//				}java Integer class
-//			}
-//		}
-//		
-//		printCoinArray(coinArray); //print inital coinArray
-
 	}
 }
 
+class CoinArray implements Coins<Integer>
+{
+	List<Integer> coins = new ArrayList<Integer>();
+//	List<Integer> coins;
+	
+	public CoinArray(int numSlots) {
+//		Integer[] array = new Integer[numSlots];
+//		for (int j = 0; j < array.length; j++) {
+		for (int j = 0; j < numSlots; j++) {
+//			array[j]= new Integer(0);
+			coins.add(new Integer(0));
+		}
+//		coins = new ArrayList<Integer>(Arrays.asList(array)) ;
+	}
 
+	@Override
+	public void add(int i) {
+//		coins.set(i, coins.get(i)+1);
+		Integer setCoin = new Integer(coins.get(i).intValue()+1);
+		coins.set(i,setCoin);
+	}
+
+	@Override
+	public void remove(Integer coin) {
+		coins.remove(coin);
+	}
+
+	@Override
+	public int size() {
+		return coins.size();
+	}
+
+	@Override
+	public String getAll() {
+		return coins.toString();
+	}
+
+	@Override
+	public Integer get(int i) {
+		return coins.get(i);
+	}
+
+	@Override
+	public void set(int i, Integer coin) {
+		coins.set(i, coin);
+	}
+}
+
+interface Coins<T> {
+	void add(int i);
+	void remove(T coin);
+	int size();
+	String getAll();
+	T get(int i);
+	void set(int i, T coin);
+}
