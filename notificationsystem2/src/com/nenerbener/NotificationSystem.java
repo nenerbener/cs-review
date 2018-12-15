@@ -16,7 +16,7 @@ public class NotificationSystem {
 			System.out.println("instanceName: " + instanceName);
 		}
 
-		//BlockingQueue<Message> messageQueue = new LinkedBlockingQueue<>();
+		//BlockingQueue<Message> messageQueue = newx LinkedBlockingQueue<>();
 		BlockingQueue<Message> messageQueue = new ArrayBlockingQueue<>(1024);
 		//when using put and take methods for BlockingQueue do not test for empty queue. The checking is done during the put and take method
 

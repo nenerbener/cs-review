@@ -44,6 +44,7 @@ public class ClosestLocations {
 		};
 
 		AbstractQueue<PQObject> pq = (PriorityQueue<PQObject>)qf.getQueue("PriorityQueue",100,cpq);
+		AbstractQueue<PQObject> pq2 = (PriorityQueue<PQObject>)qf.getQueue("PriorityQueue",100,cpq);
 
 //		AbstractQueue<PQObject> pq = new PriorityQueue<>(100, new Comparator<PQObject>() {
 //			@Override
@@ -107,21 +108,17 @@ class QueueFactory implements QueueFactoryInterface<PQObject> {
 	@Override
 	public AbstractQueue<PQObject> getQueue(String queueType) {
 
-		if (pq.equals(null)&& queueType.equals("PriorityQueue")) { //create and return pq if not created
+		if (pq.equals(null)&& queueType.equals("PriorityQueue")) //create and return pq if not created
 			pq = new PriorityQueue<PQObject>();
-			return pq;
-		}
-		else return null;  //else return null
+		return pq;
 	}
 
 	@Override
 	public AbstractQueue<PQObject> getQueue(String queueType, int size, Comparator<PQObject> c) {
 
-		if ((pq == null)&&queueType.equals("PriorityQueue")) { //create and return pq if not created
+		if ((pq == null)&&queueType.equals("PriorityQueue")) //create and return pq if not created
 			pq = new PriorityQueue<PQObject>(100, c);
 			return pq;
-		}
-		else return null;
 	}
 }
 

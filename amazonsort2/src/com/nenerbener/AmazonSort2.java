@@ -10,17 +10,17 @@ public class AmazonSort2 {
 	public static void main (String[] args) {
 		
 		
-		int[] iArray = new int[10];
-		for (int k = 0; k < iArray.length; k++) {
-			int i = iArray[k];
-			System.out.print(iArray);
-		}
-		for (int i:iArray) System.out.print(iArray[i]);
-		System.out.println();
-		Integer[] jArray = new Integer[10];
-		for (Integer j:jArray) System.out.print(jArray[j]);
-		System.out.println();
-		
+//		int[] iArray = new int[10];
+//		for (int k = 0; k < iArray.length; k++) {
+//			int i = iArray[k];
+//			System.out.print(iArray);
+//		}
+//		for (int i:iArray) System.out.print(iArray[i]);
+//		System.out.println();
+//		Integer[] jArray = new Integer[10];
+//		for (Integer j:jArray) System.out.print(jArray[j]);
+//		System.out.println();
+//		
 		// read in # coins
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Enter number of slots: ");

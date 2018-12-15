@@ -2,11 +2,13 @@ package com.nenerbener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.Collections;
 
 
 /**
@@ -58,6 +60,9 @@ public class GroupBy {
     	people.add(new Person("Nena","Texas",2));
     	people.add(new Person("Jerry","Texas",2));
     	
+    	Collections.reverse(people);
+    	System.out.println("reversed people: " + people);
+    	
     	Map<String, List<Person>> personsByPlace = new HashMap<>();
     	
     	for (Person p:people) {
@@ -74,7 +79,8 @@ public class GroupBy {
 			listOfPersons.addAll(lp);
 			System.out.println("In " + lp.get(0).getCity() + ": " + lp);
 		}
-		System.out.println("List of persons: " + listOfPersons);
+		System.out.println("List1 of persons: " + listOfPersons.toString());
+		System.out.println("List2 of persons: " + Arrays.toString(listOfPersons.toArray()));
 
 	}
 }

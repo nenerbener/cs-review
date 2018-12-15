@@ -28,7 +28,6 @@ class AnyClass {
 		surname = str;//		Integer[] jArray = new Integer[10];
 //		for (Integer j:jArray) System.out.print(jArray[j]);
 //		System.out.println();
-
 	}
 
 	String show() {
@@ -61,8 +60,7 @@ public class BinTree {
         } else {//		Integer[] jArray = new Integer[10];
 //    		for (Integer j:jArray) System.out.print(jArray[j]);
 //    		System.out.println();
-
-            // else if bigger appends to the right
+            // else if bigger appends to the righttheRootNode
             theRootNode.rightBNode = 
                insertAB(theRootNode.rightBNode, myNewNode);
         }
@@ -103,14 +101,14 @@ public class BinTree {
     }//    	listOfNames.add(new AnyClass("c"));
 //	listOfNames.add(new AnyClass("d"));
 //	listOfNames.add(new AnyClass("e"));
-//	listOfNames.add(new AnyClass("f"));
+//	listOfNames.add(new AnyClass("f"));theRootNode
 //	listOfNames.add(new AnyClass("h"));
 //	listOfNames.add(new AnyClass("i"));
 //	listOfNames.add(new AnyClass("j"));
 //	listOfNames.add(new AnyClass("a"));
 
 
-    //calls the method to do in order
+    //calls the method to do in ordertheRootNode
     public void inorderBST() {
         inorder(theBTRootNode);
     }
@@ -137,7 +135,7 @@ public class BinTree {
             if (keyName.compareTo(theRootNode.anyClass.surname) == 0) {
                 return theRootNode;
             //checks id the key is smaller than the current
-            //record  if smaller traverses to the left
+            //record  if smaller traverses to theRootNodethe left
             } else if (keyName.compareTo(theRootNode.anyClass.surname) < 0) {
                 return search(theRootNode.leftBNode, keyName);
             } else {
@@ -149,7 +147,7 @@ public class BinTree {
     }
 
     //returns null if no result else returns 
-    //the AnyClass object matched with the keyName
+    //the AnyClass object matched wittheRootNodeh the keyName
     public AnyClass searchBST(String keyName) {
         BNode temp = search(theBTRootNode, keyName);
         if (temp == null) {
@@ -161,20 +159,36 @@ public class BinTree {
         }
     }
     
+    public void flipTree(BNode theRootNode) {
+    	
+    	if (theRootNode != null) 
+    	{
+    		BNode temNode = theRootNode.leftBNode;
+    		theRootNode.leftBNode = theRootNode.rightBNode;
+    		theRootNode.rightBNode = temNode;
+    		flipTree(theRootNode.leftBNode);
+    		flipTree(theRootNode.rightBNode);
+    	}
+    }
+    
     //test driver
     public static void main(String[] args) {
     	
     	List<AnyClass> listOfNames = new ArrayList<>();
+    	listOfNames.add(new AnyClass("d"));
     	listOfNames.add(new AnyClass("b"));
     	listOfNames.add(new AnyClass("a"));
     	listOfNames.add(new AnyClass("c"));
+    	listOfNames.add(new AnyClass("f"));
+    	listOfNames.add(new AnyClass("e"));
+    	listOfNames.add(new AnyClass("g"));
 //    	listOfNames.add(new AnyClass("d"));//    	listOfNames.add(new AnyClass("c"));
 //    	listOfNames.add(new AnyClass("d"));
-//    	listOfNames.add(new AnyClass("e"));
+//    	listOfNames.add(new AnyClass("e"));theRootNodetheRootNode
 //    	listOfNames.add(new AnyClass("f"));
 //    	listOfNames.add(new AnyClass("h"));
 //    	listOfNames.add(new AnyClass("i"));
-//    	listOfNames.add(new AnyClass("j"));
+//    	listOfNames.add(new AnyClass("invertj"));
 //    	listOfNames.add(new AnyClass("a"));
 
 //    	listOfNames.add(new AnyClass("e"));
@@ -195,9 +209,15 @@ public class BinTree {
     	bt.postorderBST();
     	System.out.println();
     	
+    	
+    	
     	stack = new Stack<BNode>();
     	System.out.println("search result: " + bt.searchBST("c"));
     	System.out.println("distance: " + (stack.size()-1));
     	while(!stack.empty()) System.out.println(stack.pop().anyClass.toString());
+    	
+    	System.out.println();
+    	bt.flipTree(bt.theBTRootNode);
+    	
     }
 }
