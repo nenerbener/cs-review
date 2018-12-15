@@ -27,7 +27,7 @@ public class NewGetSetServiceTest
     public void filterQueryListToReturnNameStubTest()
     {
 		List<String> list = ngss.filterQueryListToReturnName("anything", "marc");
-		Iterator iterator = list.iterator();
+		Iterator<String> iterator = list.iterator();
 		while (iterator.hasNext()) {
 			assertEquals("marc",iterator.next());
 		}
