@@ -20,12 +20,12 @@ public class JDBCQueryDriver {
 		Connection con = null;
 
 		//Register driver class
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} 
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} 
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//		} 
+//		catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		} 
 
 		//	create statement
 		StringBuilder sb = new StringBuilder("SELECT students.student_id,"); 

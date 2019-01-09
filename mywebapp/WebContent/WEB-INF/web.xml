@@ -19,4 +19,14 @@
     <servlet-name>MyServlet</servlet-name>
     <url-pattern>/MyServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>process a fieldset</description>
+    <display-name>MyServlet2</display-name>
+    <servlet-name>MyServlet2</servlet-name>
+    <servlet-class>com.nenerbener.MyServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyServlet2</servlet-name>
+    <url-pattern>/MyServlet2</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -25,7 +25,12 @@ public class MyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String uri = request.getRequestURI();
+		String fn = request.getParameter("firstname");
+		String ln = request.getParameter("lastname");
+//		String url = request.getRequestURL();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("requestURI: ").append(request.getQueryString());
 	}
 
 	/**
