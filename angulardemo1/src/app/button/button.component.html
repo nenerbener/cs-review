@@ -1,0 +1,8 @@
+<button class="btn btn-primary" 
+    (click)="onButton()">toggle p/w</button>
+    <p *ngIf="showPW"> Secret Password = tuna </p>
+    <div *ngFor="let logElem of logArray"
+        [ngStyle]="{backgroundColor: logElem < 5 ? 'blue' : 'transparent'}" 
+        [ngClass]="{'white-text': logElem < 5}"
+    > {{ logElem }}</div>
+ 

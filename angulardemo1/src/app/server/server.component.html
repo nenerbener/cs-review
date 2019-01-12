@@ -1,1 +1,5 @@
-<h4>Inside ServerComponent: serverId: {{ serverId }} and serverStatus: {{getServerStatus()}} </h4>
+<p 
+    [ngStyle]="{ backgroundColor: getColor() }"
+    [ngClass]="{online: serverStatus === 'online'}">
+    Inside ServerComponent: serverId: {{ serverId }} and serverStatus: {{getServerStatus()}} 
+</p>
