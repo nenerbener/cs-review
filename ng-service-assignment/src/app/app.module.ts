@@ -21,7 +21,7 @@ import { CounterComponent } from './counter/counter.component';
     FormsModule,
     HttpModule
   ],
-  providers: [UsersService],
+//   providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

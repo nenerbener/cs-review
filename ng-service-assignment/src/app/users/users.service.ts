@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, OnInit } from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UsersService implements OnInit {
 
     activeUsers = ['Max', 'Anna'];
